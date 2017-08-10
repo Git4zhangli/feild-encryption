@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 允许 JDBC 支持生成的键。需要适合的驱动 -->
+		<setting name="useGeneratedKeys" value="true" />
+		<!-- 设置超时时间，它决定驱动等待一个数据库响应的时间。 -->
+		<setting name="defaultStatementTimeout" value="20000" />
+		<!-- mybatis中SQL日志 -->
+<!-- 		<setting name="logImpl" value="STDOUT_LOGGING" /> -->
+	</settings>
+	
+	<typeAliases>  
+    	<typeAlias type="com.example.feild.encryption.extension.CryptTypeHandler" alias="CryptTypeHandler"/>
+	</typeAliases>
+	
+	<typeHandlers>
+		<typeHandler javaType="com.example.feild.encryption.domain.em.Sex" handler="com.example.feild.encryption.extension.MybatisEnumHandler" />
+	</typeHandlers>
+</configuration>

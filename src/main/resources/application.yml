@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: 'text/html,text/xml,text/css,text/javascript,text/plain'
+  tomcat:
+    max-connections: 1000
+    max-threads: 800
+    
+spring:
+  profiles:
+    active: local
+    
+mybatis:
+  #指定mybatis配置文件地址
+  config-location: classpath:mybatis-config.xml
+  #指定mybatis的Mapper文件路径
+  mapper-locations: classpath:mybatis/*Mapper.xml
+  #执行mybatis的Model类存放路径，进行别名映射
+  type-aliases-package: com.example.feild.encryption.domain.pojo.model
+
+---
+spring:
+  profiles: local
+  datasource:
+    schema: classpath:/mysql.sql
+    url: jdbc:mysql://localhost:3306/demo
+    driver-class-name: com.mysql.jdbc.Driver
+    tomcat:
+      max-active: 200
+      max-wait: 10000
+      test-on-borrow: true
+      validation-query: SELECT 1
+    username: root
+    password: 123456
+    
+logging:
+  config: classpath:logback-spring.xml
+  file: 'feild-encryption'
+  path: '/xs/logs/feild-encryption/'
+  level:
+    root: INFO

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.feild.encryption.domain.dao.EncryptionExampleMapper">
+
+	<resultMap id="EncryptionExample" type="com.example.feild.encryption.domain.pojo.model.EncryptionExample">
+		<id column="ID" property="id" jdbcType="BIGINT" />
+		<result column="MOBILE" property="mobile" jdbcType="VARCHAR" typeHandler="CryptTypeHandler"/>
+		<result column="WECHAT" property="wechat" jdbcType="VARCHAR" typeHandler="CryptTypeHandler"/>
+		<result column="QQ" property="qq" jdbcType="VARCHAR" typeHandler="CryptTypeHandler"/>
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" typeHandler="CryptTypeHandler"/>
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="BIGINT" />
+		<result column="DESC" property="desc" jdbcType="BIGINT" typeHandler="CryptTypeHandler"/>
+	</resultMap>
+
+	<sql id="columns">
+		SELECT
+			ee.ID,
+			ee.MOBILE,
+			ee.WECHAT,
+			ee.QQ,
+			ee.EMAIL,
+			ee.CREATE_TIME,
+			ee.UPDATE_TIME,
+			ee.`DESC`
+		FROM
+			encryption_example AS ee
+		WHERE
+			1 = 1
+	</sql>
+
+	<select id="queryByMobile" parameterType="java.lang.String" resultMap="EncryptionExample">
+		<include refid="columns" />
+		AND ee.MOBILE = #{mobile, typeHandler=CryptTypeHandler}
+	</select>
+	
+	<select id="pagingAll" resultMap="EncryptionExample">
+		<include refid="columns" />
+	</select>
+	
+	<insert id="addEntity" keyProperty="id" parameterType="com.example.feild.encryption.domain.pojo.model.EncryptionExample">
+		INSERT INTO `encryption_example` (`MOBILE`, `WECHAT`, `QQ`, `EMAIL`, `CREATE_TIME`, `UPDATE_TIME`, `DESC`) VALUES 
+		(
+			#{mobile,typeHandler=CryptTypeHandler}, 
+			#{wechat, typeHandler=CryptTypeHandler}, 
+			#{qq, typeHandler=CryptTypeHandler}, 
+			#{email, typeHandler=CryptTypeHandler}, 
+			#{createTime}, 
+			#{updateTime}, 
+			#{desc, typeHandler=CryptTypeHandler}
+		);
+	</insert>
+	
+	<update id="updateEntity" parameterType="com.example.feild.encryption.domain.pojo.model.EncryptionExample">
+		UPDATE `encryption_example` SET 
+			`UPDATE_TIME` = #{updateTime}
+		<if test="mobile != null and mobile != ''">
+			,`MOBILE` = #{mobile, typeHandler=CryptTypeHandler}
+		</if>
+		<if test="wechat != null and wechat != ''">
+			,`WECHAT` = #{wechat, typeHandler=CryptTypeHandler}
+		</if>
+		<if test="qq != null and qq != ''">
+			,`QQ` = #{qq, typeHandler=CryptTypeHandler}
+		</if>
+		<if test="email != null and email != ''">
+			,`EMAIL` = #{email, typeHandler=CryptTypeHandler}
+		</if>
+		<if test="desc != null and desc != ''">
+			,`DESC` = #{desc, typeHandler=CryptTypeHandler}
+		</if>
+		WHERE
+			`ID` = #{id}
+	</update>
+</mapper>
