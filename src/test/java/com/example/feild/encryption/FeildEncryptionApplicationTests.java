@@ -20,7 +20,7 @@ public class FeildEncryptionApplicationTests {
 	@Test
 	public void contextLoads() {
 		long mobile = RandomUtils.nextLong(13000000000L, 19000000000L);
-		for (int i = 0; i < 99895; i++) {
+		for (int i = 0; i < 100000; i++) {
 			String prefix = String.valueOf(mobile);
 			encryptionExampleService.addEntity(prefix, prefix, prefix, prefix + "@xiangshang.com", "向上No." + (i + 1));
 			mobile += 1;
