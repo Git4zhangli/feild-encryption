@@ -45,7 +45,7 @@ public class EncryptionExampleController {
 	})
 	public ResponseEntity<PageInfo<EncryptionExample>> pagingQuery(@PathVariable int pageNum, @PathVariable int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
-		List<EncryptionExample> dataList = encryptionExampleService.pagingAll();
+		List<EncryptionExample> dataList = encryptionExampleService.pagingQuery();
 		PageInfo<EncryptionExample> pageInfo = new PageInfo<>(dataList);
 		return new SuccessResponseEntity<>(pageInfo);
 	}

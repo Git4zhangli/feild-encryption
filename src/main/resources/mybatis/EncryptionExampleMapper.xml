@@ -34,7 +34,7 @@
 		AND ee.MOBILE = #{mobile, typeHandler=CryptTypeHandler}
 	</select>
 	
-	<select id="pagingAll" resultMap="EncryptionExample">
+	<select id="pagingQuery" resultMap="EncryptionExample">
 		<include refid="columns" />
 	</select>
 	

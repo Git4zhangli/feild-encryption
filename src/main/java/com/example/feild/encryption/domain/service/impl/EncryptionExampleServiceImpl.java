@@ -22,8 +22,8 @@ public class EncryptionExampleServiceImpl implements EncryptionExampleService {
 	}
 
 	@Override
-	public List<EncryptionExample> pagingAll() {
-		return encryptionExampleMapper.pagingAll();
+	public List<EncryptionExample> pagingQuery() {
+		return encryptionExampleMapper.pagingQuery();
 	}
 
 	@Override
